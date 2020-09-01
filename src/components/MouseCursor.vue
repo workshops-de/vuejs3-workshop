@@ -1,11 +1,5 @@
 <template>
-  <div
-    v-bind:id="id"
-    @mousemove="
-      x = $event.offsetX;
-      y = $event.offsetY;
-    "
-  >
+  <div v-bind:id="id" @mousemove="updatePosition">
     <span>x: {{ x }}, y: {{ y }}</span>
     <div class="dead-spot" @mousemove.stop>DEAD SPOT</div>
   </div>
@@ -21,6 +15,12 @@ export default defineComponent({
       x: 12,
       y: 4
     };
+  },
+  methods: {
+    updatePosition(e) {
+      this.x = e.offsetX;
+      this.y = e.offsetY;
+    }
   }
 });
 </script>
