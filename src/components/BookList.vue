@@ -1,14 +1,12 @@
 <template>
   <table>
-    <tr v-for="book in books" :key="book.isbn">
-      <td>{{ book.title }}</td>
-      <td>{{ book.isbn }}</td>
-    </tr>
+    <BookListItem v-for="book in books" :key="book.isbn" v-bind="book" />
   </table>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
+import BookListItem from '@/components/BookListItem.vue';
 
 const BOOKS = [
   {
@@ -27,6 +25,9 @@ const BOOKS = [
 
 export default defineComponent({
   name: 'BookList',
+  components: {
+    BookListItem
+  },
   data() {
     return {
       books: []
