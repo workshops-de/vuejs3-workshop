@@ -1,6 +1,6 @@
 <template>
   <table>
-    <tr v-for="book in filteredBooks" :key="book.isbn">
+    <tr v-for="book in books" :key="book.isbn">
       <td>{{ book.title }}</td>
       <td>{{ book.isbn }}</td>
     </tr>
@@ -10,30 +10,30 @@
 <script>
 import { defineComponent } from 'vue';
 
+const BOOKS = [
+  {
+    title: 'Design Patterns',
+    isbn: '978-0-20163-361-0'
+  },
+  {
+    title: 'REST und HTTP',
+    isbn: '978-3-86490-120-1'
+  },
+  {
+    title: 'Eloquent JavaScript',
+    isbn: '978-1-59327-584-6'
+  }
+];
+
 export default defineComponent({
   name: 'BookList',
   data() {
     return {
-      books: [
-        {
-          title: 'Design Patterns',
-          isbn: '978-0-20163-361-0'
-        },
-        {
-          title: 'REST und HTTP',
-          isbn: '978-3-86490-120-1'
-        },
-        {
-          title: 'Eloquent JavaScript',
-          isbn: '978-1-59327-584-6'
-        }
-      ]
+      books: []
     };
   },
-  computed: {
-    filteredBooks() {
-      return this.books.filter(book => book.title.toLocaleLowerCase().includes('tt'));
-    }
+  created() {
+    this.books = BOOKS;
   }
 });
 </script>
