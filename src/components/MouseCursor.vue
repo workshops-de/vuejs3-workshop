@@ -21,6 +21,19 @@ export default defineComponent({
       this.x = e.offsetX;
       this.y = e.offsetY;
     }
+  },
+  watch: {
+    x(val) {
+      if (val > 150) {
+        alert('X is greater than 150');
+      }
+    },
+    y(newValue, oldValue) {
+      if (oldValue > 300 && newValue < oldValue) {
+        alert('Y ftw!');
+        this.y = 0;
+      }
+    }
   }
 });
 </script>
