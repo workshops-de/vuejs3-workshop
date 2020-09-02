@@ -4,6 +4,12 @@
       {{ title }} <small>{{ subtitle }}</small>
     </td>
     <td>{{ isbn }}</td>
+    <td>
+      <button :disabled="read" @click="$emit('read')">
+        <span v-if="read">✔️</span>
+        <span v-else>Read</span>
+      </button>
+    </td>
   </tr>
 </template>
 
@@ -28,7 +34,12 @@ export default defineComponent({
     numPages: {
       type: Number,
       validator: val => val < 1000
+    },
+    read: {
+      type: Boolean,
+      default: false
     }
-  }
+  },
+  emits: ['read']
 });
 </script>
