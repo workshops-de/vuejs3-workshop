@@ -13,21 +13,6 @@
 import { defineComponent } from 'vue';
 import BookListItem from '@/components/BookListItem.vue';
 
-const BOOKS = [
-  {
-    title: 'Design Patterns',
-    isbn: '978-0-20163-361-0'
-  },
-  {
-    title: 'REST und HTTP',
-    isbn: '978-3-86490-120-1'
-  },
-  {
-    title: 'Eloquent JavaScript',
-    isbn: '978-1-59327-584-6'
-  }
-];
-
 export default defineComponent({
   name: 'BookList',
   components: {
@@ -44,10 +29,14 @@ export default defineComponent({
         ...this.books[index],
         read: true
       };
+    },
+    async updateBooks() {
+      const response = await fetch('http://localhost:4730/books');
+      this.books = await response.json();
     }
   },
   created() {
-    this.books = BOOKS;
+    this.updateBooks();
   }
 });
 </script>
