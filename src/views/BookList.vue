@@ -18,24 +18,29 @@ export default defineComponent({
   components: {
     BookListItem
   },
-  data() {
-    return {
-      books: []
-    };
+  computed: {
+    books() {
+      return this.$store.state.books;
+    }
   },
   methods: {
     readBook(index) {
-      this.books[index] = {
-        ...this.books[index],
-        read: true
-      };
+      const book = this.books[index];
+
+      this.$store.dispatch('SET_BOOKS', [
+        ...this.books.map(bookEntry => {
+          if (bookEntry.isbn === book.isbn) {
+            return {
+              ...bookEntry,
+              read: true
+            };
+          }
+          return bookEntry;
+        })
+      ]);
     },
     async updateBooks() {
-      const response = await fetch('http://localhost:4730/books');
-      this.books = await response.json();
-      this.$store.dispatch('SET_BOOKS', {
-        books: this.books
-      });
+      await this.$store.dispatch('GET_BOOKS');
     }
   },
   created() {
