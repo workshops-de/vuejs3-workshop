@@ -31,6 +31,10 @@ export default defineComponent({
   },
   beforeRouteUpdate(to) {
     this.init(to.params.isbn);
+  },
+  beforeRouteLeave() {
+    const answer = window.confirm('Do you really want to leave? you have unsaved changes!');
+    return answer;
   }
 });
 </script>
