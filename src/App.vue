@@ -1,20 +1,18 @@
 <template>
   <div id="app">
     <AppNavigation />
-    <BookList />
+    <router-view />
   </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
 import AppNavigation from '@/components/AppNavigation.vue';
-import BookList from './components/BookList.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    AppNavigation,
-    BookList
+    AppNavigation
   }
 });
 </script>
