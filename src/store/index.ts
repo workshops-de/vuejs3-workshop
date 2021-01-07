@@ -1,9 +1,12 @@
-import { createStore } from 'vuex';
-import books from '@/store/modules/books';
+import { createStore, StoreOptions } from 'vuex';
+import books from '@/store/modules/books/index';
+import { RootState } from './types';
 
-export default createStore({
+const store: StoreOptions<RootState> = {
   modules: {
     books
   },
   strict: process.env.NODE_ENV !== 'production'
-});
+};
+
+export default createStore<RootState>(store);
