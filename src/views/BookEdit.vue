@@ -1,18 +1,14 @@
 <template>
-  <h1>
-    {{ book.title }}
-    (<router-link :to="{ name: 'BookEdit', params: { isbn: isbn } }">Edit</router-link>)
-  </h1>
-  <ol>
-    <li v-for="(value, key) in book" :key="key">{{ key }}: {{ value }}</li>
-  </ol>
+  <form>
+    <input type="text" v-model.lazy.trim="book.title" name="title" />
+  </form>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'BookDetail',
+  name: 'BookEdit',
   data() {
     return {
       book: {},
@@ -34,17 +30,6 @@ export default defineComponent({
   },
   beforeRouteUpdate(to) {
     this.init(to.params.isbn);
-  },
-  beforeRouteLeave() {
-    const answer = window.confirm('Do you really want to leave? you have unsaved changes!');
-    return answer;
   }
 });
 </script>
-
-<style scoped>
-ol {
-  list-style: none;
-  text-align: left;
-}
-</style>

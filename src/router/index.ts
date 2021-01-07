@@ -4,6 +4,7 @@ import About from '@/views/About.vue';
 const Books = () => import(/* webpackChunkName: "books" */ '@/views/Books.vue');
 const BookList = () => import(/* webpackChunkName: "books" */ '@/views/BookList.vue');
 const BookDetail = () => import(/* webpackChunkName: "books" */ '@/views/BookDetail.vue');
+const BookEdit = () => import(/* webpackChunkName: "books" */ '@/views/BookEdit.vue');
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -23,6 +24,11 @@ const routes: Array<RouteRecordRaw> = [
         path: ':isbn',
         name: 'BookDetail',
         component: BookDetail
+      },
+      {
+        path: ':isbn/edit',
+        name: 'BookEdit',
+        component: BookEdit
       }
     ]
   },
