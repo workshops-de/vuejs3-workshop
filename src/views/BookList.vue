@@ -33,6 +33,9 @@ export default defineComponent({
     async updateBooks() {
       const response = await fetch('http://localhost:4730/books');
       this.books = await response.json();
+      this.$store.dispatch('SET_BOOKS', {
+        books: this.books
+      });
     }
   },
   created() {
