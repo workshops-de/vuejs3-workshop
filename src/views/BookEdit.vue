@@ -76,8 +76,15 @@ export default defineComponent({
       this.isbn = isbn;
       this.getBook();
     },
-    submit() {
-      console.log(this.book);
+    async submit() {
+      const response = await fetch(`http://localhost:4730/books/${this.isbn}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.book)
+      });
+      this.book = await response.json();
     },
     validateTitle() {
       if (!required(this.book.title)) {
