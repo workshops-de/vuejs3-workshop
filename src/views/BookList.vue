@@ -12,6 +12,9 @@
 <script>
 import { defineComponent } from 'vue';
 import BookListItem from '@/components/BookListItem.vue';
+import { createNamespacedHelpers } from 'vuex';
+
+const { mapState, mapActions } = createNamespacedHelpers('books');
 
 export default defineComponent({
   name: 'BookList',
@@ -19,15 +22,17 @@ export default defineComponent({
     BookListItem
   },
   computed: {
-    books() {
-      return this.$store.state.books;
-    }
+    ...mapState(['books'])
   },
   methods: {
+    ...mapActions({
+      setBooks: 'SET_BOOKS',
+      getBooks: 'GET_BOOKS'
+    }),
     readBook(index) {
       const book = this.books[index];
 
-      this.$store.dispatch('SET_BOOKS', [
+      this.setBooks([
         ...this.books.map(bookEntry => {
           if (bookEntry.isbn === book.isbn) {
             return {
@@ -40,7 +45,7 @@ export default defineComponent({
       ]);
     },
     async updateBooks() {
-      await this.$store.dispatch('GET_BOOKS');
+      await this.getBooks();
     }
   },
   created() {
